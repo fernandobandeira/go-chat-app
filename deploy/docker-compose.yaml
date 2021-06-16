@@ -1,0 +1,36 @@
+version: "3.3"
+
+networks:
+  db:
+    driver: bridge
+
+services:
+  db:
+    image: "postgres:12-alpine"
+    restart: "always"
+    networks:
+      - db
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: my_db
+      POSTGRES_USER: my_user
+      POSTGRES_PASSWORD: my_password
+    volumes:
+      - "postgres_data:/var/lib/postgresql/data"
+      - "/etc/timezone:/etc/timezone:ro"
+      - "/etc/localtime:/etc/localtime:ro"
+      - "./migrate_db.sh:/docker-entrypoint-initdb.d/migrate_db.sh:ro"
+      - "../dbgen/dbchat/schemas:/docker-entrypoint-initdb.d/dbchat:ro"
+  chat-app:
+    build: ".."
+    restart: "always"
+    ports:
+      - "5000:5000"
+    networks:
+      - db
+    depends_on:
+      - db
+
+volumes:
+  postgres_data:

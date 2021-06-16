@@ -1,0 +1,19 @@
+{{ define "title" -}}
+<title>Chat</title>
+{{- end }}
+{{ define "styles" -}}
+<link rel="stylesheet" href="static/css/chat.css" />
+{{- end }}
+{{ define "scripts" -}}
+{{- end }}
+{{ define "body" -}}
+<div class="text-center">
+    <h1 class="display-4" id="greet">Chat app</h1>
+    <p>Please, enter your name to enter the room.</p>
+    <form action="room" method="GET">
+        <label for="name">Username:</label>
+        <input type="text" name="name" id="name">
+        <button type="submit">Enter the room</button>
+    </form>
+</div>
+{{- end}}

@@ -1,0 +1,17 @@
+{{ define "master" -}}
+<html>
+    <head>
+        {{ block "title" . -}}
+        <title>Olá</title>
+        {{- end }}
+        <base href="/chat/">
+        {{ block "styles" . -}}{{- end }}
+    </head>
+    <body>
+        {{ block "body" . -}}
+        <h1>Mundo!</h1>
+        {{- end }}
+        {{ block "scripts" . -}}{{- end }}
+    </body>
+</html>
+{{- end }}
